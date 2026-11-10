@@ -3,3 +3,5 @@ dist
 *.local
 # Enunciado do professor: material da disciplina, não vai para o repositório público.
 *.pdf
+# Arquivo de entrega no Portal (só o .txt é enviado lá, não vai para o repositório).
+entrega.txt
