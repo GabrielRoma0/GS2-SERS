@@ -1,0 +1,20 @@
+/* Cores da paleta do Mapiii (design system v2.0), copiadas como base. */
+:root {
+  --fundo: #F2E9E4;
+  --texto: #22223B;
+  --borda: #4A4E69;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --fundo: #22223B; --texto: #F2E9E4; --borda: #C9ADA7; }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 1rem/1.5 system-ui, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+main { max-width: 40rem; margin: 0 auto; padding: 1rem; }
+.aviso { margin: 0; padding: 0.75rem 1rem; border-bottom: 2px solid var(--borda); font-weight: 600; }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }

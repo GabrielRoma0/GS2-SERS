@@ -1,0 +1,5 @@
+node_modules
+dist
+*.local
+# Enunciado do professor: material da disciplina, não vai para o repositório público.
+*.pdf

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fator-emissao-sin",
+    "descricao": "Fator médio de emissão de CO₂ da rede elétrica brasileira (SIN), MCTI",
+    "valor": null,
+    "unidade": "kg CO₂/kWh",
+    "periodo": "anotar o ano",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  }
+]

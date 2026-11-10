@@ -1,0 +1,74 @@
+[
+  {
+    "id": "tarifa-b1-enel-sp",
+    "descricao": "Tarifa residencial B1 da Enel SP com impostos (TE + TUSD + ICMS + PIS/COFINS)",
+    "valor": null,
+    "unidade": "R$/kWh",
+    "periodo": "anotar a vigência",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "bandeira-cenario",
+    "descricao": "Adicional da bandeira tarifária usada no cenário",
+    "valor": null,
+    "unidade": "R$/kWh",
+    "periodo": "anotar qual bandeira e mês",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "ts-faixa-1-ate",
+    "descricao": "Tarifa Social: limite da 1ª faixa de consumo",
+    "valor": null,
+    "unidade": "kWh/mês",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Ajustar o número de faixas ao texto vigente da regra (conferir mudanças de 2025)"
+  },
+  {
+    "id": "ts-faixa-1-desconto",
+    "descricao": "Tarifa Social: desconto na 1ª faixa",
+    "valor": null,
+    "unidade": "fração (0 a 1)",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "ts-faixa-2-ate",
+    "descricao": "Tarifa Social: limite da 2ª faixa de consumo",
+    "valor": null,
+    "unidade": "kWh/mês",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "ts-faixa-2-desconto",
+    "descricao": "Tarifa Social: desconto na 2ª faixa",
+    "valor": null,
+    "unidade": "fração (0 a 1)",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  }
+]

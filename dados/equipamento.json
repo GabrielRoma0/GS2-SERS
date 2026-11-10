@@ -1,0 +1,74 @@
+[
+  {
+    "id": "cadeira-tensao",
+    "descricao": "Tensão nominal do conjunto de baterias da cadeira motorizada (modelo de referência: anotar marca e modelo na fonte_nome)",
+    "valor": null,
+    "unidade": "V",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "cadeira-capacidade",
+    "descricao": "Capacidade das baterias da cadeira (modelo de referência)",
+    "valor": null,
+    "unidade": "Ah",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "carregador-eficiencia",
+    "descricao": "Eficiência do carregador (energia que entra na bateria ÷ energia da tomada)",
+    "valor": null,
+    "unidade": "fração (0 a 1)",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Se o manual não informar, usar faixa da literatura e marcar tipo = estimado"
+  },
+  {
+    "id": "carregador-standby",
+    "descricao": "Potência do carregador ligado na tomada sem estar carregando",
+    "valor": null,
+    "unidade": "W",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "profundidade-descarga",
+    "descricao": "Quanto da bateria é reposto por recarga num dia típico",
+    "valor": null,
+    "unidade": "fração (0 a 1)",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Premissa de uso; conferir com usuários no teste"
+  },
+  {
+    "id": "recargas-por-dia",
+    "descricao": "Recargas por dia recomendadas pelo fabricante ou relatadas por usuários",
+    "valor": null,
+    "unidade": "recargas/dia",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  }
+]

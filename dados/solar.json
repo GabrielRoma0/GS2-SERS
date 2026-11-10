@@ -1,0 +1,74 @@
+[
+  {
+    "id": "irradiacao-sp",
+    "descricao": "Irradiação solar média diária em São Paulo, plano inclinado (CRESESB SunData)",
+    "valor": null,
+    "unidade": "kWh/m²/dia",
+    "periodo": "média anual",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "performance-ratio",
+    "descricao": "Performance ratio (perdas totais) de um sistema fotovoltaico residencial",
+    "valor": null,
+    "unidade": "fração (0 a 1)",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Valor típico de referência; citar a fonte"
+  },
+  {
+    "id": "custo-ongrid-wp",
+    "descricao": "Custo de um sistema fotovoltaico residencial ligado à rede",
+    "valor": null,
+    "unidade": "R$/Wp",
+    "periodo": "anotar a data do levantamento",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "custo-kit-bateria",
+    "descricao": "Custo médio de um kit solar com bateria (média de 2 ou 3 orçamentos)",
+    "valor": null,
+    "unidade": "R$",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Pesquisa de preço em lojas; citar cada uma"
+  },
+  {
+    "id": "kit-energia-util",
+    "descricao": "Energia útil armazenada no kit solar com bateria",
+    "valor": null,
+    "unidade": "kWh",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
+    "id": "compensacao-fio-b",
+    "descricao": "Parcela da tarifa que não é compensada na geração distribuída (Fio B, Lei 14.300/2022) no ano de referência",
+    "valor": null,
+    "unidade": "fração (0 a 1)",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  }
+]
