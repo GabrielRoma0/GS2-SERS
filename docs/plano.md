@@ -52,12 +52,12 @@ Reprova automática de escopo: solução genérica, sem análise energética, ou
 
 ## 2. Onde e como fica o repositório
 
-**Decisão a tomar (dupla):** nome do repo. Sugestão: `mapiii-energia` (público, no GitHub do Gabriel ou do Thor).
+**Repositório:** `GS2-SERS`, público, em https://github.com/GabrielRoma0/GS2-SERS (decidido em 09/11/2026).
 
 **Recomendação de estrutura:** um app web pequeno, **independente**, na mesma stack do Mapiii (Vite + React + TypeScript + Vitest), que mostra a "parte de energia" do assistente. Pode-se **copiar** do Mapiii o que ajudar (tokens de cor, componente de cartão com fonte/data/limitação, a busca simples por palavras-chave), mas é uma cópia: o repo oficial não muda.
 
 ```
-mapiii-energia/
+GS2-SERS/
 ├── README.md                    ← integrantes, público, problema, funcionalidades, como rodar, "contribuição de SERS"
 ├── dados/
 │   ├── README.md                ← origem, unidade, período e premissa de CADA número
@@ -224,7 +224,7 @@ Até **3 min**, não listado. Roteiro sugerido (em `video/roteiro.md`):
 
 - Público e necessidade confirmados? 
 - Alternativas: Base + A + B1 / B2 / C? 
-- Nome e conta do repo: 
+- Nome e conta do repo: GS2-SERS, conta GabrielRoma0 (público)
 - Quem pesquisa dados: 
 - Quem faz os testes com pessoas: 
 - Prazo exato no Portal: 
