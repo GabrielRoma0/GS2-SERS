@@ -4,6 +4,8 @@
 
 > Sou um protótipo de estudo, não um canal oficial. Confirme nas fontes indicadas. Toda economia, geração ou custo mostrado aqui é **estimativa**, não resultado garantido.
 
+> **Para a dupla:** o passo a passo do que fazer agora está em [docs/como-fazer.md](docs/como-fazer.md).
+
 ## Integrantes
 
 | Nome completo | RM |
@@ -59,6 +61,7 @@ npm run verificar    # tipos + testes + dados
 | `referencias.md` | Todas as fontes |
 | `video/` | Roteiro do vídeo técnico |
 | `docs/plano.md` | Plano de trabalho da dupla |
+| `docs/como-fazer.md` | Guia prático: o que cada um faz, em ordem |
 
 ## Limitações
 

@@ -2,6 +2,8 @@
 
 Contribuição da disciplina ao Mapiii (Citizen Assist AI). Escrito em 09/11/2026 a partir do enunciado `GS2026.2_SERS(5).pdf`.
 
+> **Guia prático (o que fazer agora, passo a passo):** [como-fazer.md](como-fazer.md).
+
 > **Regra desta pasta:** nada daqui vai para o repositório oficial (`mapiii-assistente`) e nada é mexido lá. O Mapiii serve só de **base** (público, tom, regras de fonte e de limitação). A entrega de SERS é um **repositório separado**.
 
 ---
