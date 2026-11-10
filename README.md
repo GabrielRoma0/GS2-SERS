@@ -8,7 +8,7 @@
 
 | Nome completo | RM |
 |---|---|
-| Gabriel Botelho Romao | RM 570589 |
+| Gabriel Botelho Romão | RM 570589 |
 | Thor Ferreira Camargo | RM 569543 |
 
 ## Público e problema
