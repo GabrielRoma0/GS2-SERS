@@ -2,14 +2,14 @@
   {
     "id": "irradiacao-sp",
     "descricao": "Irradiação solar média diária em São Paulo, plano inclinado (CRESESB SunData)",
-    "valor": null,
+    "valor": 4.65,
     "unidade": "kWh/m²/dia",
     "periodo": "média anual",
-    "tipo": "",
-    "fonte_nome": "",
-    "fonte_url": "",
-    "verificado_em": "",
-    "premissa": ""
+    "tipo": "publico",
+    "fonte_nome": "CRESESB/CEPEL, SunData v3.0: estação São Paulo (23,5° S; 46,649° O), plano inclinado com ângulo igual à latitude (24° N)",
+    "fonte_url": "https://cresesb.cepel.br/index.php?section=sundata",
+    "verificado_em": "2026-11-17",
+    "premissa": "Consulta pelas coordenadas 23,55° S; 46,63° O (centro de SP); estação a 5,9 km. No plano horizontal a média é 4,45"
   },
   {
     "id": "performance-ratio",

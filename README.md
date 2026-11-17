@@ -27,7 +27,11 @@
 | A | Tarifa Social de Energia Elétrica + hábitos de recarga | economia |
 | B | Energia solar fotovoltaica: B1 sistema ligado à rede (Lei 14.300/2022); B2 kit com bateria | renovável |
 
-Resultado e recomendação: [analise/resultados.md](analise/resultados.md) e [analise/justificativas.md](analise/justificativas.md) *(em construção)*.
+**Resultado (12 meses, sem impostos):** a recarga usa cerca de 250 kWh e custa cerca de R$ 198 por ano. A Tarifa Social não muda o custo da recarga numa casa acima de 80 kWh/mês, mas reduz a conta da casa em cerca de R$ 63 por mês. Solar na rede só para a cadeira levaria cerca de 44 anos para se pagar (sistema mínimo de 2 kWp); como parte de um sistema da casa, cerca de 4 anos. O kit com bateria não compensa como economia (cerca de 51 anos), mas garante uma recarga sem luz.
+
+**Recomendação:** 1) ver se a família se encaixa na Tarifa Social; 2) recarregar todo dia como o fabricante indica; 3) solar só como projeto da casa toda; 4) kit com bateria só por segurança na falta de luz.
+
+Detalhes: [analise/resultados.md](analise/resultados.md), [analise/justificativas.md](analise/justificativas.md) e [analise/conferencia-manual.md](analise/conferencia-manual.md).
 
 ## Funcionalidades de energia no assistente
 
@@ -70,4 +74,4 @@ npm run verificar    # tipos + testes + dados
 
 ## Limitações
 
-*(completar com a análise)* Os valores dependem do modelo da cadeira, do uso, da tarifa vigente, das bandeiras e do clima. O app não vê a conta de luz de ninguém e não decide se a pessoa pode receber a Tarifa Social: quem decide é a distribuidora.
+Valores sem ICMS, PIS/COFINS e iluminação pública. Os valores dependem do modelo da cadeira, do uso, da tarifa vigente, das bandeiras e do clima. O app não vê a conta de luz de ninguém e não decide se a pessoa pode receber a Tarifa Social: quem decide é a distribuidora.

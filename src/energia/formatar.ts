@@ -3,6 +3,7 @@
 const num = (casas: number) => new Intl.NumberFormat('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: casas });
 
 export function reais(v: number): string {
+  if (Math.abs(v) < 0.005) v = 0; // evita "R$ -0,00" por arredondamento
   return `R$ ${num(2).format(v)}`;
 }
 

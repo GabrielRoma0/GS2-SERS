@@ -1,0 +1,5 @@
+alternativa;tipo;kwh_rede_ano;custo_ano_reais;investimento_reais;economia_ano_reais;payback_anos;co2_evitado_kg_ano
+Recarregar na tomada, tarifa comum;referência;250,2857;197,5705;0,0000;0,0000;0,0000;0,0000
+Tarifa Social de Energia Elétrica;economia;250,2857;197,5705;0,0000;-0,0000;0,0000;0,0000
+Energia solar ligada à rede (geração distribuída);renovável;0,0000;31,8089;7240,0000;165,7617;43,6772;11,5382
+Kit solar com bateria, só para a cadeira;renovável;0,0000;0,0000;10098,0000;197,5705;51,1109;11,5382

@@ -1,10 +1,10 @@
 # Roteiro do vídeo técnico · SERS (até 3 min, YouTube não listado)
 
-Gravação de tela com voz, sem aparecer. Ler o texto em ritmo normal: são cerca de 400 palavras, o que dá aproximadamente 2 min 50 s.
+Gravação de tela com voz, sem aparecer. Ler o texto em ritmo normal: cerca de 2 min 50 s.
 
-**As telas do app já estão prontas** (site: https://gabrielroma0.github.io/GS2-SERS/). **Os trechos `[entre colchetes]` são números que saem de `analise/resultados.md`.** Não gravar com colchete: só depois que os dados estiverem preenchidos e a tabela gerada. Nunca falar um número que não esteja na tabela.
+**Os números abaixo saem de [analise/resultados.md](../analise/resultados.md)** (dados de 17/11/2026). Se os dados mudarem, rode `npm run analise` e confira os números antes de gravar.
 
-**Antes de gravar:** zoom do navegador em 125–150%, abas fechadas, notificações desligadas, o app aberto, a tabela e os links das fontes em abas na ordem do roteiro.
+**Antes de gravar:** abrir https://gabrielroma0.github.io/GS2-SERS/ e o repositório no GitHub; zoom do navegador em 125–150%; notificações desligadas; abas na ordem do roteiro: app, `analise/resultados.md`, `analise/justificativas.md`, página da Tarifa Social da ANEEL.
 
 ---
 
@@ -14,41 +14,41 @@ Gravação de tela com voz, sem aparecer. Ler o texto em ritmo normal: são cerc
 
 > Olá. Este é o Mapiii Energia, a contribuição da disciplina de Energias Renováveis ao Mapiii, nosso assistente do Citizen Assist AI.
 
-### Cena 2 · Público e necessidade (0:10–0:35)
+### Cena 2 · Público e necessidade (0:10–0:30)
 
-**Na tela:** tela inicial do app; depois o README, seção "Público e problema".
+**Na tela:** topo do app.
 
-> O Mapiii orienta famílias de pessoas com deficiência em São Paulo. Escolhemos quem usa cadeira de rodas motorizada. A cadeira precisa ser recarregada todos os dias. Isso pesa na conta de luz, muitas vezes de famílias de baixa renda, e, se falta energia, a pessoa pode ficar sem se locomover. Nossa pergunta foi: quanto custa carregar a cadeira e como pagar menos ou garantir a recarga?
+> O Mapiii orienta famílias de pessoas com deficiência em São Paulo. Escolhemos quem usa cadeira de rodas motorizada. A cadeira precisa ser recarregada todos os dias, isso entra na conta de luz, e, se falta energia, a pessoa pode ficar sem se locomover. Nossa pergunta: quanto custa carregar a cadeira, e qual a melhor forma de pagar menos ou garantir a recarga?
 
-### Cena 3 · Análise de consumo (0:35–1:05)
+### Cena 3 · Análise de consumo (0:30–1:00)
 
-**Na tela:** `dados/equipamento.json` e o manual da cadeira (mostrar a página da bateria); depois a fórmula em `src/energia/calculos.ts`.
+**Na tela:** `analise/resultados.md`, seção 1; depois a seção 4 (dados e fontes).
 
-> Partimos do manual de uma cadeira real: baterias de [V] volts e [Ah] ampère-hora, ou seja, [kWh da bateria] quilowatt-hora. Como o carregador perde energia, com eficiência de [eficiência], cada recarga tira da tomada cerca de [kWh por recarga] quilowatt-hora. Com uma recarga por dia, são [kWh/mês] quilowatt-hora por mês e [kWh/ano] por ano. Com a tarifa da Enel SP, de [R$/kWh] reais por quilowatt-hora, isso dá cerca de [R$/mês] por mês e [R$/ano] por ano. Cada número tem fonte, unidade, período e premissa no repositório, e os estimados estão marcados.
+> Usamos uma cadeira Freedom de 24 volts e baterias de 40 ampère-hora: 0,96 quilowatt-hora. Supondo metade da bateria por dia e um carregador com 70% de eficiência, cada recarga tira da tomada cerca de 0,69 quilowatt-hora. Com uma recarga por dia, como o fabricante recomenda, são 250 quilowatt-hora por ano. Com a tarifa da Enel SP homologada pela ANEEL, de 79 centavos por quilowatt-hora sem impostos, isso dá cerca de 16 reais por mês, ou 198 por ano. Cada número tem fonte, unidade e período no repositório, e os estimados estão marcados.
 
-### Cena 4 · Comparação das alternativas (1:05–1:45)
+### Cena 4 · Comparação das alternativas (1:00–1:45)
 
-**Na tela:** `analise/resultados.md` (a tabela), apontando com o mouse cada linha.
+**Na tela:** `analise/resultados.md`, seção 2 (a tabela), apontando cada linha.
 
-> Comparamos as alternativas no mesmo período de 12 meses. A primeira é a Tarifa Social de Energia Elétrica, para famílias no Cadastro Único ou com BPC, junto com bons hábitos de recarga. Ela não custa nada para aderir e reduz o custo anual para cerca de [R$/ano com Tarifa Social]. A segunda é a energia solar, a fonte renovável. Um sistema ligado à rede, de [kWp] quilowatt-pico, custaria cerca de [R$ investimento] e se pagaria em cerca de [payback] anos. Um kit com bateria custa [R$ kit], mas garante [autonomia] recargas mesmo sem luz. No ambiental, a recarga emite cerca de [kg CO₂/ano] quilos de CO₂ por ano, que o solar evitaria, mas painel e bateria também têm impacto na fabricação e no descarte.
+> Comparamos as alternativas em 12 meses. A Tarifa Social, pela regra da ANEEL de 2025, dá energia grátis até 80 quilowatt-hora por mês. Numa casa que já passa disso, ela não muda o custo da recarga, mas reduz a conta da casa em cerca de 63 reais por mês. A fonte renovável é a energia solar. Para a cadeira bastariam 0,19 quilowatt-pico, mas o menor sistema vendido tem 2, custa cerca de 7.200 reais e, só com a economia da cadeira, levaria 44 anos para se pagar. Num sistema para a casa toda, a parte da cadeira se paga em cerca de 4 anos. Um kit com bateria custa 10 mil reais e levaria 51 anos, mas guarda uma recarga completa para quando faltar luz. No meio ambiente, como a rede brasileira é limpa, a recarga emite só cerca de 11 quilos de CO2 por ano.
 
-### Cena 5 · Demonstração no assistente (1:45–2:30)
+### Cena 5 · Demonstração no assistente (1:45–2:25)
 
-**Na tela:** o app. Fazer, sem pressa: 1) a calculadora, mudando as recargas por dia; 2) a comparação; 3) uma pergunta livre, como "energia solar compensa?", e clicar na fonte.
+**Na tela:** o app. 1) Na calculadora, trocar o consumo da casa para 50 e mostrar o resultado mudando; abrir "Como chegamos nesse número". 2) Rolar pela comparação. 3) Clicar em "Como funciona a Tarifa Social?" e mostrar a fonte.
 
-> No assistente, a pessoa calcula quanto gasta para carregar a cadeira, vê a comparação das alternativas e pode perguntar, por exemplo, se a energia solar compensa. Toda resposta mostra a fonte, a data em que conferimos e a limitação. Os números da tela saem das mesmas funções da análise, então o assistente nunca diz um número diferente do estudo.
+> No assistente, a pessoa coloca os dados da cadeira e o consumo da casa e vê quanto gasta, com a conta passo a passo. Depois compara as alternativas e pode perguntar, por exemplo, como funciona a Tarifa Social. Toda resposta mostra a fonte, a data em que conferimos e a limitação. Os números da tela saem das mesmas funções da análise.
 
-### Cena 6 · Recomendações e limitações (2:30–2:55)
+### Cena 6 · Recomendações e limitações (2:25–2:55)
 
-**Na tela:** `analise/justificativas.md`, parte da recomendação; depois o aviso "Estimativa, não garantia" no app.
+**Na tela:** `analise/justificativas.md`, seção "Recomendação".
 
-> Nossa recomendação, nesta ordem: [recomendação 1]; [recomendação 2]; [recomendação 3]. Tudo isso é estimativa, não resultado garantido: depende do modelo da cadeira, do uso, da tarifa do mês e do clima. Quem decide a Tarifa Social é a distribuidora, e o Mapiii é um protótipo de estudo, não um canal oficial. Testamos com [N] pessoas e ajustamos o que confundiu.
+> Nossa recomendação, nesta ordem: primeiro, ver se a família se encaixa na Tarifa Social, que não custa nada e é a maior economia. Segundo, recarregar todo dia como o fabricante indica. Terceiro, energia solar só como projeto da casa toda. E o kit com bateria só para quem precisa de garantia na falta de luz. Tudo é estimativa: muda com o modelo da cadeira, o uso, os impostos e a tarifa do mês. O Mapiii é um protótipo de estudo, não um canal oficial.
 
 ### Cena 7 · Fechamento (2:55–3:00)
 
 **Na tela:** link do repositório.
 
-> O código, os dados e as fontes estão no GitHub. Obrigado.
+> Código, dados e fontes estão no GitHub. Obrigado.
 
 ---
 

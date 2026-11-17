@@ -2,13 +2,13 @@
   {
     "id": "fator-emissao-sin",
     "descricao": "Fator médio de emissão de CO₂ da rede elétrica brasileira (SIN), MCTI",
-    "valor": null,
+    "valor": 0.0461,
     "unidade": "kg CO₂/kWh",
     "periodo": "média anual de 2025",
-    "tipo": "",
-    "fonte_nome": "",
-    "fonte_url": "",
-    "verificado_em": "",
-    "premissa": ""
+    "tipo": "publico",
+    "fonte_nome": "MCTI, Fatores de emissão de CO₂ do SIN para inventários (planilha Inventário 2026, ano 2025: 0,0461 tCO₂/MWh)",
+    "fonte_url": "https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/sirene/dados-e-ferramentas/fatores-de-emissao",
+    "verificado_em": "2026-11-17",
+    "premissa": "tCO₂/MWh é igual a kg CO₂/kWh. O fator muda todo mês (em 2026, de 0,031 a 0,052)"
   }
 ]
