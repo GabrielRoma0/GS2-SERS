@@ -48,6 +48,18 @@
     "premissa": ""
   },
   {
+    "id": "horas-ociosas-carregador",
+    "descricao": "Horas por dia em que o carregador fica na tomada sem estar carregando (opcional, junto com carregador-standby)",
+    "valor": null,
+    "unidade": "h/dia",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Premissa de hábito; conferir com usuários no teste"
+  },
+  {
     "id": "profundidade-descarga",
     "descricao": "Quanto da bateria é reposto por recarga num dia típico",
     "valor": null,

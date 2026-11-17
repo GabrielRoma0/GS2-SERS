@@ -2,7 +2,7 @@
 
 Gravação de tela com voz, sem aparecer. Ler o texto em ritmo normal: são cerca de 400 palavras, o que dá aproximadamente 2 min 50 s.
 
-**Os trechos `[entre colchetes]` são números que saem de `analise/resultados.md`.** Não gravar com colchete: só depois que os dados estiverem preenchidos e a tabela gerada. Nunca falar um número que não esteja na tabela.
+**As telas do app já estão prontas** (site: https://gabrielroma0.github.io/GS2-SERS/). **Os trechos `[entre colchetes]` são números que saem de `analise/resultados.md`.** Não gravar com colchete: só depois que os dados estiverem preenchidos e a tabela gerada. Nunca falar um número que não esteja na tabela.
 
 **Antes de gravar:** zoom do navegador em 125–150%, abas fechadas, notificações desligadas, o app aberto, a tabela e os links das fontes em abas na ordem do roteiro.
 

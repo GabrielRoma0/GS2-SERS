@@ -24,6 +24,18 @@
     "premissa": ""
   },
   {
+    "id": "consumo-casa-mes",
+    "descricao": "Consumo mensal da casa SEM a cadeira (para saber em que faixa da Tarifa Social a recarga cai)",
+    "valor": null,
+    "unidade": "kWh/mês",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": "Conta de luz real anonimizada ou consumo médio residencial de SP (EPE)"
+  },
+  {
     "id": "ts-faixa-1-ate",
     "descricao": "Tarifa Social: limite da 1ª faixa de consumo",
     "valor": null,

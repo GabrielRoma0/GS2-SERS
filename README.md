@@ -31,11 +31,13 @@ Resultado e recomendação: [analise/resultados.md](analise/resultados.md) e [an
 
 ## Funcionalidades de energia no assistente
 
-*(em construção, Passo 5 do [plano](docs/plano.md))*
+Site: https://gabrielroma0.github.io/GS2-SERS/
 
-1. Calculadora "quanto gasto para carregar a cadeira?"
-2. Comparação das alternativas, com a recomendação e o porquê
-3. Perguntas livres sobre energia, respondidas só com fichas que têm fonte, data de conferência e limitação
+1. **Calculadora** "quanto gasto para carregar a cadeira?": a pessoa troca tensão, capacidade da bateria e recargas por dia e vê kWh, R$ e CO₂ por mês e por ano, com "como chegamos nesse número" e as fontes.
+2. **Comparação** das alternativas para 12 meses: economia, investimento, payback simples, CO₂ evitado e limitações de cada uma, da mais barata para começar à mais cara.
+3. **Pergunte ao Mapi sobre energia**: perguntas livres (custo, Tarifa Social, solar, falta de luz, meio ambiente) respondidas só com os números da análise, sempre com fonte, data de conferência e limitação. Sem assunto conhecido, o assistente diz que não sabe.
+
+Os números da tela e os de `analise/resultados.md` saem das **mesmas funções** (`src/energia/analise.ts`).
 
 ## Como executar
 
@@ -46,6 +48,7 @@ npm install
 npm run dev          # app em http://localhost:5173
 npm test             # testes das contas
 npm run validar-dados  # confere se todo número de dados/ tem fonte
+npm run analise      # gera analise/resultados.md (precisa dos dados completos)
 npm run verificar    # tipos + testes + dados
 ```
 
@@ -54,7 +57,9 @@ npm run verificar    # tipos + testes + dados
 | Pasta | O que tem |
 |---|---|
 | `dados/` | Números usados nas contas, cada um com origem, unidade, período e premissa ([formato](dados/README.md)) |
-| `src/energia/calculos.ts` | Todas as fórmulas (energia, custo, solar, payback, CO₂), usadas pelo app e pela análise |
+| `src/energia/calculos.ts` | Todas as fórmulas (energia, custo, solar, payback, CO₂) |
+| `src/energia/analise.ts` | Comparação das alternativas, usada pelo app e pela análise |
+| `src/energia/responder.ts` | Respostas do assistente às perguntas sobre energia |
 | `src/app/` | Telas do assistente |
 | `analise/` | Comparação das alternativas e justificativas |
 | `testes-usuarios/` | Roteiro e registro dos testes com pessoas e dos ajustes |

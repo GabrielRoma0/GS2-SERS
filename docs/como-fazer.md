@@ -39,7 +39,9 @@ Este guia diz **exatamente** o que cada um faz agora, em ordem. O plano geral (o
 
 ---
 
-## Parte 2 · Preencher os 19 números (a parte mais importante)
+## Parte 2 · Preencher os 22 números (a parte mais importante)
+
+> **As telas já estão prontas.** Rode `npm run dev` e abra http://localhost:5173: enquanto faltar dado, o app mostra números **de EXEMPLO** (faixa amarela). Quando os 22 números estiverem preenchidos, a faixa some e aparecem os números reais.
 
 ### Como preencher um número
 
@@ -117,12 +119,14 @@ Escolher **um** modelo de cadeira de rodas motorizada vendido no Brasil (de pref
 | `carregador-standby` | Consumo do carregador sem carregar (W) | Se não achar, pode **apagar este item** e citar como limitação. Opcional |
 | `profundidade-descarga` | Quanto da bateria se gasta num dia típico | É uma **premissa de uso**: `tipo` = `estimado`. Ex.: "assumido uso que gasta a bateria toda por dia, o pior caso". Conferir com quem usa cadeira no teste |
 | `recargas-por-dia` | Recomendação de recarga do fabricante | Muitos manuais dizem "carregar todas as noites". Se for isso, `valor` = `1` |
+| `horas-ociosas-carregador` | Quantas horas por dia o carregador fica na tomada sem carregar | Premissa (`estimado`). Ex.: carrega à noite e fica plugado o resto do dia. **Se apagar `carregador-standby`, apague este também** |
 
 #### Bloco 2 · A conta de luz (arquivo `dados/tarifas.json`)
 
 | id | Onde buscar | Como |
 |---|---|---|
 | `tarifa-b1-enel-sp` | **Jeito mais fácil:** uma conta de luz real da Enel de alguém da família. Dividir o valor total da energia (R$) pelo consumo (kWh) = R$/kWh com impostos. `tipo` = `real`; em `fonte_nome` colocar "conta de luz Enel SP, mês/ano (dados pessoais omitidos)". Como `fonte_url` precisa de link, usar a página de tarifas da Enel SP ou da ANEEL que mostra a tarifa do mesmo período | **Nunca** colocar nome, endereço ou número do cliente no repositório |
+| `consumo-casa-mes` | A mesma conta de luz: o consumo do mês em kWh (sem a cadeira, ou descontando uma estimativa dela) | Serve para saber em que faixa da Tarifa Social a recarga cai. `tipo` = `real` ou `estimado` |
 | `bandeira-cenario` | Site da ANEEL, página de **bandeiras tarifárias** (buscar "ANEEL bandeiras tarifárias valores") | Escolher um cenário (ex.: bandeira verde = 0, ou a do mês atual) e dizer qual em `periodo` |
 | `ts-faixa-1-ate`, `ts-faixa-1-desconto`, `ts-faixa-2-...` | Lei 12.212/2010 (https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/lei/l12212.htm) **e** a página da ANEEL sobre **Tarifa Social de Energia Elétrica** | **Atenção:** as regras mudaram em 2025. Usar o que a ANEEL diz que vale **hoje**. O número de faixas pode ser diferente de 2: criar ou apagar blocos para ficar igual à regra. Desconto em fração: 65% = `0.65`, isenção total = `1` |
 
@@ -137,6 +141,7 @@ Anotar também, para a ficha do assistente (não é número): **quem pode pedir 
 | `custo-ongrid-wp` | Estudo de mercado de geração distribuída da **Greener** (buscar "Greener estudo estratégico geração distribuída preço R$/Wp") ou 2 a 3 simuladores/orçamentos de empresas de energia solar | Em R$ por Wp (watt-pico). Se o estudo der por faixa de potência, usar a menor (residencial) |
 | `custo-kit-bateria` | 2 ou 3 anúncios de "kit solar off grid com bateria" em lojas grandes | Fazer a **média** e listar cada loja em `premissa` com o preço e a data. `tipo` = `estimado` |
 | `kit-energia-util` | Ficha técnica do kit escolhido: capacidade da bateria (V × Ah ÷ 1000 = kWh) | Se a bateria for de chumbo-ácido, a energia útil é menor que a total: explicar em `premissa` |
+| `kit-potencia-painel` | Ficha do mesmo kit: potência dos painéis em Wp | |
 | `compensacao-fio-b` | **Lei 14.300/2022** (https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/lei/l14300.htm), artigo sobre a transição do pagamento do Fio B | Usar a porcentagem do ano de 2026. Pode deixar por último: se ficar difícil, o Claude simplifica a conta e isso vira limitação |
 
 #### Bloco 4 · O meio ambiente (arquivo `dados/emissoes.json`)
@@ -151,13 +156,19 @@ Anotar também, para a ficha do assistente (não é número): **quem pode pedir 
 npm run validar-dados -- --estrito
 ```
 
-Tem que dizer `0 erro(s) · 0 dado(s) pendente(s)`. Aí avisem o Claude: "dados preenchidos". Ele faz a Parte 3.
+Tem que dizer `0 erro(s) · 0 dado(s) pendente(s)`. Depois:
+
+```bash
+npm run analise
+```
+
+Isso grava a tabela de comparação em `analise/resultados.md`. Façam `git add -A`, `git commit` e `git push`: o site publicado se atualiza sozinho em 1 ou 2 minutos. Avisem o Claude: "dados preenchidos".
 
 ---
 
-## Parte 3 · Contas e comparação (Claude faz, vocês conferem)
+## Parte 3 · Conferir as contas (vocês)
 
-O Claude gera a tabela comparando as alternativas em `analise/resultados.md`. **Vocês:**
+A tabela sai do `npm run analise` (Parte 2). **Vocês:**
 
 1. Pegam **um** cenário da tabela (ex.: custo por mês da Base).
 2. Refazem na calculadora do celular usando as fórmulas que estão no começo de cada função em `src/energia/calculos.ts`.
@@ -169,9 +180,9 @@ Isso serve para vocês **entenderem e conseguirem explicar** os números no víd
 
 Ler a tabela e decidir, com base nos números, a **ordem** das recomendações. O Claude escreve `analise/justificativas.md` e vocês revisam: o texto tem que dizer o que vocês concordam.
 
-## Parte 5 · Telas do assistente (Claude faz)
+## Parte 5 · Telas do assistente (prontas)
 
-Calculadora, comparação e perguntas sobre energia, cada resposta com fonte, data e "estimativa, não garantia". Vocês abrem no celular e dizem o que ficou confuso.
+Calculadora, comparação e perguntas sobre energia, cada resposta com fonte, data e "estimativa, não garantia". Site publicado: https://gabrielroma0.github.io/GS2-SERS/ (mostra "Em preparação" até os dados ficarem completos). Abram no celular e digam o que ficou confuso.
 
 ## Parte 6 · Teste com pessoas (Thor e Gabriel)
 
@@ -200,7 +211,7 @@ Calculadora, comparação e perguntas sobre energia, cada resposta com fonte, da
 | Até | O quê | Quem |
 |---|---|---|
 | 10/11 | Parte 1 (Thor entra no repositório) | Gabriel e Thor |
-| 11/11 | Parte 2 (19 números com fonte) | Thor: blocos 1 e 4 · Gabriel: blocos 2 e 3 |
+| 11/11 | Parte 2 (22 números com fonte) | Thor: blocos 1 e 4 · Gabriel: blocos 2 e 3 |
 | 12/11 | Partes 3 e 4 | Claude + conferência da dupla |
 | 13/11 | Parte 5 | Claude |
 | 13–15/11 | Parte 6 | Thor e Gabriel |

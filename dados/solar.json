@@ -60,6 +60,18 @@
     "premissa": ""
   },
   {
+    "id": "kit-potencia-painel",
+    "descricao": "Potência dos painéis do kit solar com bateria",
+    "valor": null,
+    "unidade": "Wp",
+    "periodo": "",
+    "tipo": "",
+    "fonte_nome": "",
+    "fonte_url": "",
+    "verificado_em": "",
+    "premissa": ""
+  },
+  {
     "id": "compensacao-fio-b",
     "descricao": "Parcela da tarifa que não é compensada na geração distribuída (Fio B, Lei 14.300/2022) no ano de referência",
     "valor": null,
