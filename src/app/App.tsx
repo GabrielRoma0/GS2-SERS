@@ -67,6 +67,7 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
   const [tensao, setTensao] = useState(String(p.tensaoV));
   const [capacidade, setCapacidade] = useState(String(p.capacidadeAh));
   const [recargas, setRecargas] = useState(String(p.recargasPorDia));
+  const [casa, setCasa] = useState(String(p.consumoCasaKWhMes));
 
   const lerNumero = (t: string) => {
     const v = Number(t.replace(',', '.'));
@@ -75,10 +76,15 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
   const tensaoV = lerNumero(tensao);
   const capacidadeAh = lerNumero(capacidade);
   const recargasDia = lerNumero(recargas);
-  const valido = tensaoV !== null && capacidadeAh !== null && recargasDia !== null && tensaoV <= 100 && capacidadeAh <= 500 && recargasDia <= 5;
+  const casaKWh = lerNumero(casa);
+  const valido =
+    tensaoV !== null && capacidadeAh !== null && recargasDia !== null && casaKWh !== null && tensaoV <= 100 && capacidadeAh <= 500 && recargasDia <= 5 && casaKWh <= 5000;
   const a = useMemo(
-    () => (valido ? analisar(p, { tensaoV: tensaoV!, capacidadeAh: capacidadeAh!, recargasPorDia: recargasDia! }) : analisar(p)),
-    [p, valido, tensaoV, capacidadeAh, recargasDia]
+    () =>
+      valido
+        ? analisar(p, { tensaoV: tensaoV!, capacidadeAh: capacidadeAh!, recargasPorDia: recargasDia!, consumoCasaKWhMes: casaKWh! })
+        : analisar(p),
+    [p, valido, tensaoV, capacidadeAh, recargasDia, casaKWh]
   );
 
   return (
@@ -90,10 +96,11 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
           <Campo id="tensao" rotulo="Tensão da bateria" unidade="V (volts)" valor={tensao} mudar={setTensao} />
           <Campo id="capacidade" rotulo="Capacidade da bateria" unidade="Ah (ampère-hora)" valor={capacidade} mudar={setCapacidade} />
           <Campo id="recargas" rotulo="Recargas completas por dia" unidade="por dia" valor={recargas} mudar={setRecargas} />
+          <Campo id="casa" rotulo="Consumo da casa sem a cadeira" unidade="kWh por mês (na conta de luz)" valor={casa} mudar={setCasa} />
         </div>
         {!valido && (
           <p className="erro" role="alert">
-            Confira os números: use valores maiores que zero (tensão até 100 V, capacidade até 500 Ah, até 5 recargas por dia). Mostrando o modelo de referência.
+            Confira os números: use valores maiores que zero (tensão até 100 V, capacidade até 500 Ah, até 5 recargas por dia, casa até 5.000 kWh). Mostrando o modelo de referência.
           </p>
         )}
         <div className="resultado" aria-live="polite">

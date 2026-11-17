@@ -78,6 +78,29 @@ describe('analisar', () => {
     expect(s.limitacoes.join()).toMatch(/Não considera/);
   });
 
+  it('sistema na rede respeita o tamanho mínimo do mercado e mostra a parte proporcional', () => {
+    // necessário 0,306 kWp; mínimo 2 kWp → investimento 2 × 4000 = 8000; proporcional continua 1224.
+    const b = analisar({ ...params(), kWpMinimoOnGrid: 2 });
+    const s = alt(b, 'solar-rede');
+    expect(b.kWpInstalado).toBe(2);
+    expect(s.investimentoReais).toBeCloseTo(8000);
+    expect(s.paybackAnos).toBeCloseTo(8000 / 312.732);
+    expect(b.investimentoProporcionalReais).toBeCloseTo(1224);
+    expect(s.destaque).toMatch(/menor sistema/);
+  });
+
+  it('Tarifa Social com gratuidade até 80 kWh: casa acima da faixa não muda a recarga, mas reduz a conta da casa', () => {
+    const regra = { ...params(), faixasTarifaSocial: [{ ateKWh: 80, desconto: 1 }], consumoCasaKWhMes: 180 };
+    const b = analisar(regra);
+    const ts = alt(b, 'tarifa-social');
+    expect(ts.economiaAnoReais).toBeCloseTo(0);
+    expect(b.economiaCasaTarifaSocialMesReais).toBeCloseTo(80);
+    expect(ts.destaque).toMatch(/Não muda o custo da recarga/);
+    // Casa que gasta 50 kWh: os primeiros 30 kWh da cadeira caem na faixa grátis (37,23 − 30 = 7,23 pagos/mês).
+    const pequena = analisar(regra, { consumoCasaKWhMes: 50 });
+    expect(alt(pequena, 'tarifa-social').custoAnoReais).toBeCloseTo(7.23 * 12);
+  });
+
   it('nenhum texto promete direito', () => {
     expect(JSON.stringify(a)).not.toMatch(/tem direito/i);
   });

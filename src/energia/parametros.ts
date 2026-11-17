@@ -19,6 +19,8 @@ export interface Parametros {
   irradiacaoKWhM2Dia: number;
   performanceRatio: number;
   custoOnGridReaisWp: number;
+  /** Menor sistema ligado à rede que se encontra no mercado (kWp). */
+  kWpMinimoOnGrid: number;
   custoKitReais: number;
   kitEnergiaUtilKWh: number;
   kitPotenciaWp: number;
@@ -39,6 +41,7 @@ const OBRIGATORIOS = {
   irradiacaoKWhM2Dia: 'irradiacao-sp',
   performanceRatio: 'performance-ratio',
   custoOnGridReaisWp: 'custo-ongrid-wp',
+  kWpMinimoOnGrid: 'ongrid-potencia-minima',
   custoKitReais: 'custo-kit-bateria',
   kitEnergiaUtilKWh: 'kit-energia-util',
   kitPotenciaWp: 'kit-potencia-painel',

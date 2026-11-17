@@ -1,7 +1,7 @@
 // "Pergunte ao Mapi sobre energia": responde só com a análise e cita os dados usados.
 // Sem assunto conhecido, diz que não sabe. Nunca diz "você tem direito" nem promete economia.
 import type { Analise, IdAlternativa } from './analise.ts';
-import { anos, kg, kWh, reais } from './formatar.ts';
+import { anos, kg, kWh, numero, reais } from './formatar.ts';
 import type { Dado } from './validar-dados.ts';
 
 export interface Resposta {
@@ -74,12 +74,15 @@ export function responder(pergunta: string, a: Analise): Resposta | null {
         assunto,
         titulo: 'Tarifa Social de Energia Elétrica',
         paragrafos: [
-          'É um desconto na conta de luz para famílias de baixa renda que se encaixam nas regras, como as inscritas no Cadastro Único ou com alguém que recebe o BPC. Pode valer para a sua família: confira as regras na fonte.',
-          `Com a Tarifa Social, a recarga da cadeira custaria cerca de ${reais(ts.custoAnoReais)} por ano, uma diferença de cerca de ${reais(ts.economiaAnoReais)} por ano. Não tem custo para pedir.`,
-          'O pedido é feito na distribuidora de energia (em São Paulo, a Enel) ou pelo cadastro no CadÚnico.'
+          'É um desconto na conta de luz. Segundo a ANEEL, pode valer para famílias no Cadastro Único com renda de até meio salário mínimo por pessoa, para quem recebe o BPC, e para famílias no Cadastro Único com renda de até 3 salários mínimos que tenham alguém com deficiência cujo tratamento use aparelho elétrico de forma contínua. Confira as regras na fonte.',
+          `Pela regra atual, ${a.descontoFaixaTarifaSocial >= 1 ? 'a energia é gratuita' : `o desconto é de ${Math.round(a.descontoFaixaTarifaSocial * 100)}%`} até ${numero(a.limiteFaixaTarifaSocialKWh ?? 0, 0)} kWh por mês. Numa casa que gasta ${numero(a.consumoCasaKWhMes, 0)} kWh por mês, isso reduz a conta em cerca de ${reais(a.economiaCasaTarifaSocialMesReais)} por mês.`,
+          ts.economiaAnoReais < 0.01
+            ? `Como a casa já passa de ${numero(a.limiteFaixaTarifaSocialKWh ?? 0, 0)} kWh, a recarga da cadeira continua custando o mesmo: o ganho é na conta da casa.`
+            : `A recarga da cadeira passaria a custar cerca de ${reais(ts.custoAnoReais)} por ano, cerca de ${reais(ts.economiaAnoReais)} a menos.`,
+          'O desconto entra automaticamente para as famílias que se encaixam nas regras e são titulares da conta. Se não vier, procure a Enel ou atualize o Cadastro Único.'
         ],
         dadosUsados: ['ts-faixa-1-ate', 'ts-faixa-1-desconto', 'consumo-casa-mes', ...DADOS_TARIFA],
-        limitacao: 'Quem decide se a família recebe o desconto é a distribuidora. O desconto depende do consumo total da casa.'
+        limitacao: 'Quem decide se a família recebe o desconto é a distribuidora. Impostos e iluminação pública continuam sendo cobrados.'
       };
     }
     case 'solar': {
@@ -89,11 +92,12 @@ export function responder(pergunta: string, a: Analise): Resposta | null {
         assunto,
         titulo: 'Energia solar compensa?',
         paragrafos: [
-          `Um sistema solar ligado à rede para gerar a energia da cadeira teria cerca de ${a.kWpNecessario.toFixed(2).replace('.', ',')} kWp, custaria cerca de ${reais(s.investimentoReais)} e se pagaria em ${anos(s.paybackAnos)}.`,
+          `A cadeira precisaria de cerca de ${numero(a.kWpNecessario, 2)} kWp de painéis. O menor sistema ligado à rede vendido tem ${numero(a.kWpInstalado, 1)} kWp e custa cerca de ${reais(s.investimentoReais)}; só com a economia da cadeira, se pagaria em ${anos(s.paybackAnos)}.`,
+          `Se a família instalar um sistema para a casa toda, a parte da cadeira custaria cerca de ${reais(a.investimentoProporcionalReais)} e se pagaria em ${anos(a.paybackProporcionalAnos)}.`,
           `Um kit solar com bateria custa cerca de ${reais(k.investimentoReais)} e se pagaria em ${anos(k.paybackAnos)}, mas tem a vantagem de funcionar na falta de luz.`,
           'Compare na tela "Comparação" com a Tarifa Social, que não tem custo para pedir.'
         ],
-        dadosUsados: ['irradiacao-sp', 'performance-ratio', 'custo-ongrid-wp', 'custo-kit-bateria', 'kit-potencia-painel', 'compensacao-fio-b', ...DADOS_TARIFA],
+        dadosUsados: ['irradiacao-sp', 'performance-ratio', 'custo-ongrid-wp', 'ongrid-potencia-minima', 'custo-kit-bateria', 'kit-potencia-painel', 'compensacao-fio-b', ...DADOS_TARIFA],
         limitacao: `${limitacao} Precisa de telhado com sol; o payback não inclui manutenção, troca de bateria nem aumento da tarifa.`
       };
     }

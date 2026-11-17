@@ -55,7 +55,9 @@ function markdown(a: Analise, dados: Dado[]): string {
     );
   }
   linhas.push('');
-  linhas.push(`Solar ligado à rede dimensionado em ${numero(a.kWpNecessario, 3)} kWp. Kit com bateria: cerca de ${a.recargasAutonomiaKit} recarga(s) completa(s) sem luz.`);
+  linhas.push(`- **Solar ligado à rede:** a cadeira precisaria de ${numero(a.kWpNecessario, 3)} kWp; o investimento da tabela é o do menor sistema vendido (${numero(a.kWpInstalado, 1)} kWp). Se o sistema for dimensionado para a casa toda, a parte da cadeira custa ${reais(a.investimentoProporcionalReais)} e se paga em ${anos(a.paybackProporcionalAnos)}.`);
+  linhas.push(`- **Tarifa Social:** com a casa consumindo ${numero(a.consumoCasaKWhMes, 1)} kWh/mês sem a cadeira, a conta da casa cai cerca de ${reais(a.economiaCasaTarifaSocialMesReais)} por mês (${reais(a.economiaCasaTarifaSocialMesReais * 12)} por ano).`);
+  linhas.push(`- **Kit com bateria:** guarda cerca de ${a.recargasAutonomiaKit} recarga(s) completa(s) para usar sem luz.`);
   linhas.push('');
   linhas.push('## 3. Limitações de cada alternativa');
   linhas.push('');

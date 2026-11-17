@@ -34,6 +34,7 @@ export const DADOS_EXEMPLO: Dado[] = [
   ex('irradiacao-sp', 5, 'kWh/m²/dia'),
   ex('performance-ratio', 0.8, 'fração'),
   ex('custo-ongrid-wp', 4, 'R$/Wp'),
+  ex('ongrid-potencia-minima', 0.1, 'kWp'),
   ex('custo-kit-bateria', 3000, 'R$'),
   ex('kit-energia-util', 2, 'kWh'),
   ex('kit-potencia-painel', 300, 'Wp'),

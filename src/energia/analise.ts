@@ -14,6 +14,7 @@ import {
   potenciaPicoNecessariaKWp,
   recargasDeAutonomia
 } from './calculos.ts';
+import { numero as formatarNumero, reais as formatarReais } from './formatar.ts';
 import type { Parametros } from './parametros.ts';
 
 export const DIAS_NO_ANO = 365;
@@ -23,6 +24,8 @@ export interface Ajustes {
   tensaoV?: number;
   capacidadeAh?: number;
   recargasPorDia?: number;
+  /** Consumo da casa sem a cadeira (kWh/mês), da conta de luz. */
+  consumoCasaKWhMes?: number;
 }
 
 export type IdAlternativa = 'base' | 'habitos' | 'tarifa-social' | 'solar-rede' | 'kit-solar';
@@ -57,6 +60,17 @@ export interface Analise {
   custoMesReais: number;
   co2KgAno: number;
   kWpNecessario: number;
+  /** kWp do sistema realmente comprável (o maior entre o necessário e o mínimo do mercado). */
+  kWpInstalado: number;
+  /** Investimento proporcional, se a cadeira dividir um sistema dimensionado para a casa toda. */
+  investimentoProporcionalReais: number;
+  paybackProporcionalAnos: number;
+  consumoCasaKWhMes: number;
+  /** Quanto a Tarifa Social reduz a conta de energia da casa toda por mês (sem a cadeira). */
+  economiaCasaTarifaSocialMesReais: number;
+  /** Limite da primeira faixa da Tarifa Social (kWh/mês). */
+  limiteFaixaTarifaSocialKWh: number | null;
+  descontoFaixaTarifaSocial: number;
   recargasAutonomiaKit: number;
   alternativas: Alternativa[];
   limitacoesGerais: string[];
@@ -118,10 +132,12 @@ export function analisar(p: Parametros, ajustes: Ajustes = {}): Analise {
   }
 
   // Tarifa Social: o desconto depende da faixa em que a casa já está; a cadeira soma em cima do consumo da casa.
-  const casa = p.consumoCasaKWhMes;
+  const casa = ajustes.consumoCasaKWhMes ?? p.consumoCasaKWhMes;
   const custoMesCadeiraTS =
     custoMensalComFaixas(casa + kWhMes, tarifa, p.faixasTarifaSocial) - custoMensalComFaixas(casa, tarifa, p.faixasTarifaSocial);
   const custoAnoTS = custoMesCadeiraTS * 12;
+  const economiaCasaTarifaSocialMesReais = custoReais(casa, tarifa) - custoMensalComFaixas(casa, tarifa, p.faixasTarifaSocial);
+  const economiaTSCadeira = custoAnoReais - custoAnoTS;
   alternativas.push({
     id: 'tarifa-social',
     nome: 'Tarifa Social de Energia Elétrica',
@@ -129,21 +145,28 @@ export function analisar(p: Parametros, ajustes: Ajustes = {}): Analise {
     kWhAnoDaRede: kWhAno,
     custoAnoReais: custoAnoTS,
     investimentoReais: 0,
-    economiaAnoReais: custoAnoReais - custoAnoTS,
+    economiaAnoReais: economiaTSCadeira,
     paybackAnos: 0,
     co2EvitadoKgAno: 0,
-    destaque: 'Não tem custo para pedir, mas só vale para quem se encaixa nas regras.',
+    destaque:
+      economiaTSCadeira < 0.01
+        ? `Não muda o custo da recarga quando a casa já passa da faixa com desconto, mas reduz a conta da casa em cerca de ${formatarReais(economiaCasaTarifaSocialMesReais)} por mês.`
+        : `Reduz o custo da recarga e a conta da casa (cerca de ${formatarReais(economiaCasaTarifaSocialMesReais)} por mês na casa). Não tem custo para pedir.`,
     limitacoes: [
       'Só para famílias que se encaixam nas regras da Tarifa Social. Quem decide é a distribuidora.',
-      `O desconto depende do consumo total da casa (aqui: ${casa} kWh/mês sem a cadeira).`,
+      `O desconto depende do consumo total da casa (aqui: ${formatarNumero(casa)} kWh/mês sem a cadeira).`,
       'Reduz o custo, não o consumo: não diminui emissões.'
     ]
   });
 
-  // Solar ligado à rede, dimensionado para gerar o consumo anual da cadeira.
+  // Solar ligado à rede. O necessário para a cadeira é pequeno; o mercado só vende a partir de um tamanho mínimo.
   const kWpNecessario = potenciaPicoNecessariaKWp(kWhAno, p.irradiacaoKWhM2Dia, p.performanceRatio);
-  const investimentoRede = investimentoSolarReais(kWpNecessario, p.custoOnGridReaisWp);
+  const kWpInstalado = Math.max(kWpNecessario, p.kWpMinimoOnGrid);
+  const investimentoRede = investimentoSolarReais(kWpInstalado, p.custoOnGridReaisWp);
   const economiaRede = custoReais(kWhAno, tarifa) * (1 - (p.fioB ?? 0));
+  const investimentoProporcionalReais = investimentoSolarReais(kWpNecessario, p.custoOnGridReaisWp);
+  const paybackProporcionalAnos = paybackSimplesAnos(investimentoProporcionalReais, economiaRede);
+  const minimoManda = kWpInstalado > kWpNecessario;
   alternativas.push({
     id: 'solar-rede',
     nome: 'Energia solar ligada à rede (geração distribuída)',
@@ -154,13 +177,16 @@ export function analisar(p: Parametros, ajustes: Ajustes = {}): Analise {
     economiaAnoReais: economiaRede,
     paybackAnos: paybackSimplesAnos(investimentoRede, economiaRede),
     co2EvitadoKgAno: co2KgAno,
-    destaque: 'Gera energia limpa no ano, mas exige investimento e um telhado próprio.',
+    destaque: minimoManda
+      ? `A cadeira precisaria de só ${formatarNumero(kWpNecessario, 2)} kWp, mas o menor sistema vendido tem ${formatarNumero(p.kWpMinimoOnGrid, 1)} kWp. Se o sistema for feito para a casa toda, a parte da cadeira custa cerca de ${formatarReais(investimentoProporcionalReais)}.`
+      : 'Gera energia limpa no ano, mas exige investimento e um telhado próprio.',
     limitacoes: [
       'Exige telhado com sol e imóvel próprio (ou autorização).',
       p.fioB === null
         ? 'Não considera a parcela da tarifa que não é compensada (Fio B): a economia real é menor.'
         : `Considera que ${Math.round(p.fioB * 100)}% da tarifa não é compensada (Fio B, Lei 14.300/2022).`,
-      'Na prática, um sistema costuma ter tamanho mínimo maior que o da cadeira: o investimento real pode ser maior.',
+      'A economia conta só a energia da cadeira; um sistema maior também abateria o resto da conta da casa.',
+      'A conta nunca fica abaixo da taxa mínima (custo de disponibilidade) da distribuidora.',
       'Não funciona na falta de luz (desliga junto com a rede, por segurança).'
     ]
   });
@@ -200,6 +226,13 @@ export function analisar(p: Parametros, ajustes: Ajustes = {}): Analise {
     custoMesReais: custoAnoReais / 12,
     co2KgAno,
     kWpNecessario,
+    kWpInstalado,
+    investimentoProporcionalReais,
+    paybackProporcionalAnos,
+    consumoCasaKWhMes: casa,
+    economiaCasaTarifaSocialMesReais,
+    limiteFaixaTarifaSocialKWh: p.faixasTarifaSocial[0]?.ateKWh ?? null,
+    descontoFaixaTarifaSocial: p.faixasTarifaSocial[0]?.desconto ?? 0,
     recargasAutonomiaKit,
     alternativas,
     limitacoesGerais: [
