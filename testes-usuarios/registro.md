@@ -32,7 +32,7 @@ Três pessoas usaram o site no celular, com as três tarefas do [roteiro](roteir
 
 | Participante | Perfil | Tarefa 1 · custo por mês | Tarefa 2 · solar compensa? | Tarefa 3 · de onde vêm os números |
 |---|---|---|---|---|
-| P1 | Fonoaudióloga (atende pessoas que usam cadeira) | Conseguiu; usou dados de pacientes como base | "Mais ou menos"; entendeu que "é possível economizar" com solar | Respondeu "pacientes" (falou da própria base, não achou as fontes do app) |
+| P1 | Fonoaudióloga | Conseguiu; usou dados de pacientes como base | "Mais ou menos"; entendeu que "é possível economizar" com solar | Respondeu "pacientes" (falou da própria base, não achou as fontes do app) |
 | P2 | Analista de sistemas | Conseguiu; pesquisou valores e se baseou neles | Conseguiu; entendeu que "compensa" | Respondeu "Google" (não achou as fontes do app) |
 | P3 | Paciente de P1 | Conseguiu; usou dados da própria vida | Conseguiu; entendeu que "dá para economizar" | Respondeu "dados da vida" (não achou as fontes do app) |
 
@@ -51,4 +51,4 @@ Três pessoas usaram o site no celular, com as três tarefas do [roteiro](roteir
 | "Tela com muita letra" (P3) | Antes: textos longos e limitações abertas → depois: frase de instrução encurtada, aviso de estimativa junto da tarifa, e "Limitações que valem para todas" recolhidas numa caixa que abre ao tocar |
 | Os três conseguiram achar o custo mensal (tarefa 1) | Mantido: custo em letra grande no topo funcionou |
 
-**Limites deste teste:** só três pessoas, todas no mesmo dia; uma delas usa cadeira de rodas. Os ajustes acima ainda não foram testados de novo com pessoas.
+**Limites deste teste:** só três pessoas, todas no mesmo dia; não registramos se alguma delas usa cadeira motorizada, então a premissa de "metade da bateria por dia" segue sem confirmação. Os ajustes acima ainda não foram testados de novo com pessoas.
