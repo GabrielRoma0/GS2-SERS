@@ -1,6 +1,6 @@
 # Resultados · comparação das alternativas
 
-Gerado por `npm run analise` em 2026-11-17, com as funções de `src/energia/` (as mesmas do app). Não editar à mão.
+Gerado por `npm run analise` em 2026-11-18, com as funções de `src/energia/` (as mesmas do app). Não editar à mão.
 
 **Necessidade:** recarregar a cadeira de rodas motorizada. **Período de referência:** 12 meses.
 
@@ -61,7 +61,7 @@ Gerado por `npm run analise` em 2026-11-17, com as funções de `src/energia/` (
 | Dado | Valor | Tipo | Fonte | Conferido em |
 |---|---|---|---|---|
 | Fator médio de emissão de CO₂ da rede elétrica brasileira (SIN), MCTI | 0,046 kg CO₂/kWh | publico | [MCTI, Fatores de emissão de CO₂ do SIN para inventários (planilha Inventário 2026, ano 2025: 0,0461 tCO₂/MWh)](https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/sirene/dados-e-ferramentas/fatores-de-emissao) | 2026-11-17 |
-| Tensão nominal do conjunto de baterias da cadeira motorizada (Freedom: 2 baterias de 12 V em série) | 24,000 V | publico | [Freedom, manual do proprietário das cadeiras motorizadas (carregador de 24 V)](https://www.fwa.com.br/wp-content/uploads/2018/12/freedom_cm.pdf) | 2026-11-17 |
+| Tensão nominal do conjunto de baterias da cadeira motorizada (Freedom: 2 baterias de 12 V em série) | 24,000 V | publico | [Freedom, manual do proprietário das cadeiras motorizadas, p. 16 (motores de 24 V) e p. 23 (carregador de 24 V)](https://www.fwa.com.br/wp-content/uploads/2018/12/freedom_cm.pdf) | 2026-11-17 |
 | Capacidade das baterias da cadeira (Freedom Lumina Motorizada 20, opção VRLA 40 Ah) | 40,000 Ah | publico | [Freedom, página da Cadeira de Rodas Lumina Motorizada 20 (baterias de 18 a 60 Ah)](https://freedom.ind.br/produtos/cadeira-de-rodas-freedom-lumina-motorizada-20/) | 2026-11-17 |
 | Eficiência de energia de bateria chumbo-ácido com carregador (energia aproveitada ÷ energia da tomada) | 0,700 fração (0 a 1) | estimado | [Battery Design, Efficiency (eficiência típica de chumbo-ácido ~70%)](https://www.batterydesign.net/chemistry/efficiency/) | 2026-11-17 |
 | Quanto da bateria é reposto por recarga num dia típico | 0,500 fração (0 a 1) | estimado | [Freedom, como carregar as baterias (recomenda não deixar a carga se esgotar)](https://freedom.ind.br/carregar-baterias/) | 2026-11-17 |

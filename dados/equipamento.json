@@ -6,10 +6,10 @@
     "unidade": "V",
     "periodo": "especificação do fabricante",
     "tipo": "publico",
-    "fonte_nome": "Freedom, manual do proprietário das cadeiras motorizadas (carregador de 24 V)",
+    "fonte_nome": "Freedom, manual do proprietário das cadeiras motorizadas, p. 16 (motores de 24 V) e p. 23 (carregador de 24 V)",
     "fonte_url": "https://www.fwa.com.br/wp-content/uploads/2018/12/freedom_cm.pdf",
     "verificado_em": "2026-11-17",
-    "premissa": "Conferir no manual: página das especificações do carregador e das baterias"
+    "premissa": "Conferido pela dupla no manual em 17/11/2026"
   },
   {
     "id": "cadeira-capacidade",
