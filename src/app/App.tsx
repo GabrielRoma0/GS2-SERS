@@ -40,6 +40,7 @@ export function App() {
             <a href="#calculadora">Calculadora</a>
             <a href="#comparacao">Comparação</a>
             <a href="#pergunte">Pergunte</a>
+            <a href="#de-onde">De onde vêm os números</a>
           </nav>
         )}
       </header>
@@ -91,7 +92,31 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
     <>
       <section id="calculadora" aria-labelledby="t-calc">
         <h2 id="t-calc">Quanto gasto para carregar a cadeira?</h2>
-        <p>Os valores já preenchidos são do modelo de referência. Troque pelos da sua cadeira (estão no manual ou na etiqueta da bateria).</p>
+        <div className="resultado principal" aria-live="polite">
+          <p className="rotulo">Carregar a cadeira custa cerca de</p>
+          <p className="valor-grande">
+            {reais(a.custoMesReais)} <span>por mês</span>
+          </p>
+          <p>
+            Isso dá {reais(a.custoAnoReais)} por ano. Na conta de luz, são {kWh(a.kWhMes)} por mês.
+          </p>
+          <p className="nota">É uma estimativa, sem impostos e sem Tarifa Social.</p>
+        </div>
+        <details className="explica">
+          <summary>Por que é estimativa?</summary>
+          <p>
+            O valor muda com o modelo da cadeira, com quanto a pessoa anda por dia, com a tarifa e a bandeira do mês e com os impostos, que
+            não estão na conta. Use os campos abaixo para chegar mais perto do seu caso.
+          </p>
+        </details>
+        <details className="explica">
+          <summary>O que é kWh?</summary>
+          <p>
+            kWh (quilowatt-hora) é a unidade de energia que aparece na sua conta de luz. A distribuidora cobra um valor por cada kWh usado
+            no mês.
+          </p>
+        </details>
+        <p>Os valores já preenchidos são de uma cadeira de referência. Troque pelos da sua (estão no manual ou na etiqueta da bateria).</p>
         <div className="campos">
           <Campo id="tensao" rotulo="Tensão da bateria" unidade="V (volts)" valor={tensao} mudar={setTensao} />
           <Campo id="capacidade" rotulo="Capacidade da bateria" unidade="Ah (ampère-hora)" valor={capacidade} mudar={setCapacidade} />
@@ -103,15 +128,7 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
             Confira os números: use valores maiores que zero (tensão até 100 V, capacidade até 500 Ah, até 5 recargas por dia, casa até 5.000 kWh). Mostrando o modelo de referência.
           </p>
         )}
-        <div className="resultado" aria-live="polite">
-          <p className="destaque">
-            Cerca de <strong>{reais(a.custoMesReais)}</strong> por mês
-          </p>
-          <p>
-            {kWh(a.kWhMes)} por mês · {reais(a.custoAnoReais)} por ano · {kg(a.co2KgAno)} por ano
-          </p>
-          <p className="nota">Estimativa, não valor garantido. Com a tarifa comum da Enel SP, sem Tarifa Social.</p>
-        </div>
+        <p className="nota">A recarga também está ligada a cerca de {kg(a.co2KgAno)} por ano, pela energia da rede.</p>
         <details>
           <summary>Como chegamos nesse número</summary>
           <ol>
@@ -132,10 +149,16 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
           </ol>
           <Fontes dados={['cadeira-tensao', 'cadeira-capacidade', 'carregador-eficiencia', 'profundidade-descarga', 'tarifa-b1-enel-sp', 'fator-emissao-sin']} fontes={fontes} />
         </details>
+        <p>
+          <a className="botao-fontes" href="#de-onde">
+            De onde vêm esses números?
+          </a>
+        </p>
       </section>
 
       <Comparacao a={a} />
       <Pergunte a={a} fontes={fontes} />
+      <DeOnde fontes={fontes} />
     </>
   );
 }
@@ -160,6 +183,27 @@ function Comparacao({ a }: { a: Analise }) {
       <p>
         Comparação para 12 meses, contra o que a família gasta hoje: <strong>{reais(a.custoAnoReais)} por ano</strong>. Da opção mais barata para começar à mais cara:
       </p>
+      <details className="explica">
+        <summary>O que é "tempo para o dinheiro voltar" (payback)?</summary>
+        <p>
+          É quanto tempo a economia na conta leva para pagar o que foi gasto na compra. Exemplo: gastar R$ 1.000 e economizar R$ 100 por
+          ano leva 10 anos para o dinheiro voltar.
+        </p>
+      </details>
+      <details className="explica">
+        <summary>Qual a diferença entre solar ligado à rede e solar com bateria?</summary>
+        <p>
+          <strong>Ligado à rede:</strong> placas no telhado, ligadas à rede da Enel. A energia que sobra vira desconto na conta. Desliga
+          quando falta luz, por segurança.
+        </p>
+        <p>
+          <strong>Com bateria (kit):</strong> placa e uma bateria portátil, sem ligação com a Enel. Guarda energia para usar quando falta
+          luz.
+        </p>
+        <p>
+          <strong>kWp (quilowatt-pico)</strong> é o tamanho do conjunto de placas: quanto maior, mais energia gera.
+        </p>
+      </details>
       <ol className="cartoes">
         {ordem.map((o) => (
           <li key={o.id} className="cartao">
@@ -167,6 +211,26 @@ function Comparacao({ a }: { a: Analise }) {
               {o.nome} <span className="selo">{o.tipo}</span>
             </h3>
             <p>{o.destaque}</p>
+            {o.id === 'solar-rede' && (
+              <div className="duas-colunas" role="group" aria-label="Solar só para a cadeira ou para a casa toda">
+                <div>
+                  <p className="rotulo">Só para a cadeira</p>
+                  <p>
+                    <strong>{reais(o.investimentoReais)}</strong> de investimento
+                  </p>
+                  <p>dinheiro volta em {anos(o.paybackAnos)}</p>
+                  {o.paybackAnos <= a.paybackProporcionalAnos && <p className="veredito">Volta mais rápido</p>}
+                </div>
+                <div>
+                  <p className="rotulo">Como parte de um sistema da casa toda</p>
+                  <p>
+                    <strong>{reais(a.investimentoProporcionalReais)}</strong> é a parte da cadeira
+                  </p>
+                  <p>dinheiro volta em {anos(a.paybackProporcionalAnos)}</p>
+                  {a.paybackProporcionalAnos < o.paybackAnos && <p className="veredito">Volta mais rápido</p>}
+                </div>
+              </div>
+            )}
             <dl>
               <div>
                 <dt>Economia por ano</dt>
@@ -177,7 +241,7 @@ function Comparacao({ a }: { a: Analise }) {
                 <dd>{o.investimentoReais === 0 ? 'nenhum' : reais(o.investimentoReais)}</dd>
               </div>
               <div>
-                <dt>Se paga em</dt>
+                <dt>Tempo para o dinheiro voltar</dt>
                 <dd>{anos(o.paybackAnos)}</dd>
               </div>
               <div>
@@ -271,6 +335,37 @@ function Pergunte({ a, fontes }: { a: Analise; fontes: Map<string, Dado> }) {
           </article>
         )}
       </div>
+    </section>
+  );
+}
+
+function DeOnde({ fontes }: { fontes: Map<string, Dado> }) {
+  const dados = [...fontes.values()].filter((d) => d.valor !== null);
+  const tipo = (t: string) => (t === 'estimado' ? 'estimado' : t === 'real' ? 'medido' : 'fonte pública');
+  return (
+    <section id="de-onde" aria-labelledby="t-onde">
+      <h2 id="t-onde">De onde vêm esses números?</h2>
+      <p>
+        Cada número usado nas contas tem uma fonte, com a data em que conferimos. Os marcados como <strong>estimado</strong> são premissas
+        nossas, explicadas abaixo.
+      </p>
+      <ul className="lista-dados">
+        {dados.map((d) => (
+          <li key={d.id}>
+            <p>
+              <strong>{d.descricao}</strong>: {numero(d.valor!, d.valor! % 1 === 0 ? 0 : d.valor! < 1 ? 3 : 2)} {d.unidade}{' '}
+              <span className="selo">{tipo(d.tipo)}</span>
+            </p>
+            <p className="nota">
+              <a href={d.fonte_url} target="_blank" rel="noopener noreferrer">
+                {d.fonte_nome}
+              </a>{' '}
+              · conferido em {d.verificado_em.split('-').reverse().join('/')}
+            </p>
+            {d.premissa && <p className="nota">{d.premissa}</p>}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
