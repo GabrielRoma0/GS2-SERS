@@ -6,6 +6,7 @@ pelo gravar-telas.mjs (que só precisa da duração estimada de cada cena).
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -31,6 +32,17 @@ def ler_cenas(roteiro: Path = PASTA / "roteiro.md") -> list[dict]:
                 "estimada_s": round(palavras / PALAVRAS_POR_SEGUNDO + 1.0, 1),
             }
         )
+        # Se já existe o áudio da cena, a duração real manda (as telas são gravadas nesse ritmo).
+        for ext in ("mp3", "m4a", "wav", "ogg", "opus", "aac", "webm"):
+            audio = PASTA / "audios" / f"cena{cenas[-1]['numero']}.{ext}"
+            if audio.exists():
+                dur = subprocess.run(
+                    ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(audio)],
+                    capture_output=True, text=True, check=True,
+                ).stdout.strip()
+                cenas[-1]["estimada_s"] = round(float(dur) + 0.5, 1)
+                cenas[-1]["tem_audio"] = True
+                break
     return cenas
 
 

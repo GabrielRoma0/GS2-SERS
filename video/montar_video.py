@@ -57,6 +57,25 @@ def achar_audio(numero: int) -> Path | None:
     return None
 
 
+def intervalo_da_fala(audio: Path, total: float) -> tuple[float, float]:
+    """Onde a voz começa e termina no áudio (ignora o silêncio da ponta), pelo silencedetect."""
+    saida = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-i", str(audio), "-af", "silencedetect=noise=-35dB:d=0.3", "-f", "null", "-"],
+        capture_output=True,
+        text=True,
+    ).stderr
+    inicios = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", saida)]
+    fins = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", saida)]
+    ini, fim = 0.0, total
+    if inicios and inicios[0] < 0.05 and fins:
+        ini = fins[0]
+    if inicios and (len(fins) < len(inicios) or (fins and fins[-1] >= total - 0.05)):
+        fim = inicios[-1]
+    if fim - ini < 1.0:  # detecção estranha: usa o áudio inteiro
+        return 0.0, total
+    return ini, fim
+
+
 def blocos_de_legenda(fala: str) -> list[str]:
     """Divide a fala em blocos de até 2 linhas, cortando de preferência no fim de frase ou vírgula."""
     frases = re.split(r"(?<=[.!?;:])\s+", fala.strip())
@@ -133,7 +152,11 @@ def main() -> None:
 
         # Legenda: cada bloco fica na tela um tempo proporcional ao seu tamanho.
         blocos = blocos_de_legenda(c["fala"])
-        util_ini, util_fim = inicio + 0.15, inicio + dur - (FOLGA_FIM if audio else 0.3)
+        if audio:
+            fala_ini, fala_fim = intervalo_da_fala(audio, dur - FOLGA_FIM)
+            util_ini, util_fim = inicio + max(0.0, fala_ini - 0.1), inicio + min(dur, fala_fim + 0.3)
+        else:
+            util_ini, util_fim = inicio + 0.15, inicio + dur - 0.3
         total = sum(len(b) for b in blocos) or 1
         t = util_ini
         for b in blocos:
