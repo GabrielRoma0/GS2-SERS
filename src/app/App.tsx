@@ -100,6 +100,9 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
           <p>
             Isso dá {reais(a.custoAnoReais)} por ano. Na conta de luz, são {kWh(a.kWhMes)} por mês.
           </p>
+          <p>
+            Tarifa usada: <strong>{reais(a.tarifaEfetivaReaisKWh)} por kWh</strong> (Enel SP, bandeira do mês, sem impostos).
+          </p>
           <p className="nota">É uma estimativa, sem impostos e sem Tarifa Social.</p>
         </div>
         <details className="explica">
@@ -204,6 +207,7 @@ function Comparacao({ a }: { a: Analise }) {
           <strong>kWp (quilowatt-pico)</strong> é o tamanho do conjunto de placas: quanto maior, mais energia gera.
         </p>
       </details>
+      <GraficoRetorno a={a} />
       <ol className="cartoes">
         {ordem.map((o) => (
           <li key={o.id} className="cartao">
@@ -230,6 +234,18 @@ function Comparacao({ a }: { a: Analise }) {
                   {a.paybackProporcionalAnos < o.paybackAnos && <p className="veredito">Volta mais rápido</p>}
                 </div>
               </div>
+            )}
+            {o.id === 'solar-rede' && (
+              <p className="nota">
+                O investimento é a média de mercado do sistema completo: placas, inversor, projeto e instalação. Não inclui manutenção, limpeza
+                nem a troca do inversor ao longo dos anos.
+              </p>
+            )}
+            {o.id === 'kit-solar' && (
+              <p className="nota">
+                O investimento é o preço do kit pronto (bateria portátil e placa dobrável), sem instalação. Não inclui a troca da bateria no fim
+                da vida útil.
+              </p>
             )}
             <dl>
               <div>
@@ -336,6 +352,35 @@ function Pergunte({ a, fontes }: { a: Analise; fontes: Map<string, Dado> }) {
         )}
       </div>
     </section>
+  );
+}
+
+function GraficoRetorno({ a }: { a: Analise }) {
+  const solar = a.alternativas.find((x) => x.id === 'solar-rede')!;
+  const kit = a.alternativas.find((x) => x.id === 'kit-solar')!;
+  const ts = a.alternativas.find((x) => x.id === 'tarifa-social')!;
+  const itens = [
+    { nome: 'Tarifa Social', anos: ts.paybackAnos, texto: 'sem investimento' },
+    { nome: 'Solar como parte da casa toda', anos: a.paybackProporcionalAnos, texto: anos(a.paybackProporcionalAnos) },
+    { nome: 'Solar só para a cadeira', anos: solar.paybackAnos, texto: anos(solar.paybackAnos) },
+    { nome: 'Kit solar com bateria', anos: kit.paybackAnos, texto: anos(kit.paybackAnos) }
+  ];
+  const maior = Math.max(1, ...itens.map((i) => (Number.isFinite(i.anos) ? i.anos : 0)));
+  return (
+    <figure className="grafico">
+      <figcaption>Tempo para o dinheiro voltar (quanto menor a barra, melhor)</figcaption>
+      <ul>
+        {itens.map((i) => (
+          <li key={i.nome}>
+            <span className="g-nome">{i.nome}</span>
+            <span className="g-barra" aria-hidden="true">
+              <span style={{ width: `${Number.isFinite(i.anos) ? Math.max(2, (i.anos / maior) * 100) : 100}%` }} />
+            </span>
+            <span className="g-valor">{i.texto}</span>
+          </li>
+        ))}
+      </ul>
+    </figure>
   );
 }
 

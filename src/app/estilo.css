@@ -112,3 +112,10 @@ footer { padding-bottom: 2rem; border-top: 1px solid var(--borda); color: var(--
 .lista-dados { padding: 0; list-style: none; }
 .lista-dados li { border-bottom: 1px solid var(--borda); padding: 0.5rem 0; }
 .lista-dados p { margin: 0.25rem 0; }
+.grafico { margin: 1rem 0; background: var(--superficie); border: 1px solid var(--borda); border-radius: 0.75rem; padding: 1rem; }
+.grafico figcaption { font-weight: 600; margin-bottom: 0.5rem; }
+.grafico ul { list-style: none; padding: 0; margin: 0; }
+.grafico li { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.25rem; padding: 0.375rem 0; }
+.g-barra { display: block; height: 14px; background: var(--fundo); border-radius: 999px; overflow: hidden; }
+.g-barra span { display: block; height: 100%; background: var(--destaque); border-radius: 999px; }
+.g-valor { font-weight: 700; }

@@ -15,6 +15,17 @@ Sem nome, idade exata, endereço ou qualquer dado pessoal. Participantes identif
 | Fontes difíceis de achar | Antes: fontes só dentro de "Como chegamos nesse número" → depois: botão "De onde vêm esses números?" e seção com todos os números, fonte, data e premissa |
 | Não ficava claro por que o valor é estimativa | Antes: só a palavra "estimativa" → depois: caixa "Por que é estimativa?" explicando o que muda o valor |
 
+### Etapa 1b · Segunda rodada simulada (17/11/2026)
+
+**Também não é teste com pessoas reais:** dez perfis simulados por IA, avaliando a versão anterior aos ajustes acima. A maior parte dos pontos (kWh, payback, fontes, custo em destaque, rede × bateria) repete a primeira rodada e já estava corrigida. Pontos novos e o que foi feito:
+
+| Problema provável apontado | Ajuste feito (antes → depois) |
+|---|---|
+| A tarifa usada no cálculo não aparecia (perfil comparador de preços) | Antes: tarifa só dentro do passo a passo → depois: "Tarifa usada: R$ 0,79 por kWh" no quadro do resultado |
+| Poderia ser mais visual (perfil que prefere gráficos) | Antes: só números nos cartões → depois: gráfico de barras "Tempo para o dinheiro voltar" comparando as alternativas |
+| Faltava dizer o que entra no investimento e o que fica de fora (perfil de planejamento financeiro) | Antes: só o valor → depois: nota no cartão do solar (inclui placas, inversor, projeto e instalação; não inclui manutenção nem troca do inversor) e no do kit (sem instalação; não inclui troca da bateria) |
+| Resultados e fontes difíceis de achar rápido (perfil que busca praticidade) | Já atendido pelos ajustes da Etapa 1: custo no topo e botão "De onde vêm esses números?" |
+
 ## Etapa 2 · Teste com pessoas (versão já ajustada)
 
 | Data | Participante | Perfil | Tarefa | O que a pessoa fez e disse | Ajuste feito (antes → depois) |
