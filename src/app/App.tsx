@@ -101,9 +101,13 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
             Isso dá {reais(a.custoAnoReais)} por ano. Na conta de luz, são {kWh(a.kWhMes)} por mês.
           </p>
           <p>
-            Tarifa usada: <strong>{reais(a.tarifaEfetivaReaisKWh)} por kWh</strong> (Enel SP, bandeira do mês, sem impostos).
+            Tarifa usada: <strong>{reais(a.tarifaEfetivaReaisKWh)} por kWh</strong> (Enel SP, sem impostos). É uma estimativa.
           </p>
-          <p className="nota">É uma estimativa, sem impostos e sem Tarifa Social.</p>
+          <p>
+            <a className="botao-fontes" href="#de-onde">
+              Ver de onde vêm esses números
+            </a>
+          </p>
         </div>
         <details className="explica">
           <summary>Por que é estimativa?</summary>
@@ -119,7 +123,7 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
             no mês.
           </p>
         </details>
-        <p>Os valores já preenchidos são de uma cadeira de referência. Troque pelos da sua (estão no manual ou na etiqueta da bateria).</p>
+        <p>Troque pelos dados da sua cadeira (estão na etiqueta da bateria):</p>
         <div className="campos">
           <Campo id="tensao" rotulo="Tensão da bateria" unidade="V (volts)" valor={tensao} mudar={setTensao} />
           <Campo id="capacidade" rotulo="Capacidade da bateria" unidade="Ah (ampère-hora)" valor={capacidade} mudar={setCapacidade} />
@@ -152,11 +156,6 @@ function Conteudo({ p, fontes }: { p: Parametros; fontes: Map<string, Dado> }) {
           </ol>
           <Fontes dados={['cadeira-tensao', 'cadeira-capacidade', 'carregador-eficiencia', 'profundidade-descarga', 'tarifa-b1-enel-sp', 'fator-emissao-sin']} fontes={fontes} />
         </details>
-        <p>
-          <a className="botao-fontes" href="#de-onde">
-            De onde vêm esses números?
-          </a>
-        </p>
       </section>
 
       <Comparacao a={a} />
@@ -183,9 +182,8 @@ function Comparacao({ a }: { a: Analise }) {
   return (
     <section id="comparacao" aria-labelledby="t-comp">
       <h2 id="t-comp">Como pagar menos?</h2>
-      <p>
-        Comparação para 12 meses, contra o que a família gasta hoje: <strong>{reais(a.custoAnoReais)} por ano</strong>. Da opção mais barata para começar à mais cara:
-      </p>
+      <Resumo a={a} />
+      <p>Detalhes de cada opção, em 12 meses, da mais barata para começar à mais cara:</p>
       <details className="explica">
         <summary>O que é "tempo para o dinheiro voltar" (payback)?</summary>
         <p>
@@ -276,12 +274,14 @@ function Comparacao({ a }: { a: Analise }) {
           </li>
         ))}
       </ol>
-      <h3>Vale para todas</h3>
-      <ul>
-        {a.limitacoesGerais.map((l) => (
-          <li key={l}>{l}</li>
-        ))}
-      </ul>
+      <details className="explica">
+        <summary>Limitações que valem para todas</summary>
+        <ul>
+          {a.limitacoesGerais.map((l) => (
+            <li key={l}>{l}</li>
+          ))}
+        </ul>
+      </details>
     </section>
   );
 }
@@ -352,6 +352,34 @@ function Pergunte({ a, fontes }: { a: Analise; fontes: Map<string, Dado> }) {
         )}
       </div>
     </section>
+  );
+}
+
+function Resumo({ a }: { a: Analise }) {
+  const solar = a.alternativas.find((x) => x.id === 'solar-rede')!;
+  const kit = a.alternativas.find((x) => x.id === 'kit-solar')!;
+  const ts = a.alternativas.find((x) => x.id === 'tarifa-social')!;
+  return (
+    <div className="resumo" role="note" aria-label="Resumo">
+      <p className="rotulo">Em resumo</p>
+      <ul>
+        <li>
+          <strong>Sem gastar nada:</strong> se a família se encaixa na Tarifa Social, a conta da casa cai cerca de{' '}
+          {reais(a.economiaCasaTarifaSocialMesReais)} por mês
+          {ts.economiaAnoReais < 0.01 ? ' (a recarga da cadeira continua igual).' : '.'}
+        </li>
+        <li>
+          <strong>Energia solar só para a cadeira:</strong> custa {reais(solar.investimentoReais)} e o dinheiro leva {anos(solar.paybackAnos)} para
+          voltar.
+        </li>
+        <li>
+          <strong>Energia solar para a casa toda:</strong> a parte da cadeira volta em {anos(a.paybackProporcionalAnos)}.
+        </li>
+        <li>
+          <strong>Kit com bateria:</strong> leva {anos(kit.paybackAnos)} para voltar; serve para ter energia quando falta luz.
+        </li>
+      </ul>
+    </div>
   );
 }
 

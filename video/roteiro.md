@@ -38,11 +38,11 @@ Gravação de tela com voz, sem aparecer. Ler o texto em ritmo normal: cerca de 
 
 > No assistente, a pessoa coloca os dados da cadeira e o consumo da casa e vê quanto gasta, com a conta passo a passo. Depois compara as alternativas e pode perguntar, por exemplo, como funciona a Tarifa Social. Toda resposta mostra a fonte, a data em que conferimos e a limitação. Os números da tela saem das mesmas funções da análise.
 
-### Cena 6 · Recomendações e limitações (2:25–2:55)
+### Cena 6 · Testes, recomendações e limitações (2:25–2:55)
 
-**Na tela:** `analise/justificativas.md`, seção "Recomendação".
+**Na tela:** `testes-usuarios/registro.md` (Etapa 2) e depois o quadro "Em resumo" do app.
 
-> Nossa recomendação, nesta ordem: primeiro, ver se a família se encaixa na Tarifa Social, que não custa nada e é a maior economia. Segundo, recarregar todo dia como o fabricante indica. Terceiro, energia solar só como projeto da casa toda. E o kit com bateria só para quem precisa de garantia na falta de luz. Tudo é estimativa: muda com o modelo da cadeira, o uso, os impostos e a tarifa do mês. O Mapiii é um protótipo de estudo, não um canal oficial.
+> Testamos com três pessoas: uma fonoaudióloga, um paciente dela e um analista de sistemas. Todos acharam o custo, mas saíram achando que o solar compensava e ninguém achou as fontes. Por isso colocamos um resumo no topo e o botão das fontes junto do resultado. Nossa recomendação: primeiro a Tarifa Social, que não custa nada; solar só como projeto da casa toda; e o kit com bateria só para quem precisa de energia na falta de luz. Tudo é estimativa, e o Mapiii é um protótipo de estudo, não um canal oficial.
 
 ### Cena 7 · Fechamento (2:55–3:00)
 
