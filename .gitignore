@@ -5,3 +5,6 @@ dist
 *.pdf
 # Arquivo de entrega no Portal (só o .txt é enviado lá, não vai para o repositório).
 entrega.txt
+video/telas/
+video/audios/
+video/saida/

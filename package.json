@@ -16,7 +16,9 @@
     "test:watch": "vitest",
     "validar-dados": "tsx scripts/validar-dados.ts",
     "analise": "tsx analise/gerar-analise.ts",
-    "verificar": "npm run typecheck && npm test && npm run validar-dados"
+    "verificar": "npm run typecheck && npm test && npm run validar-dados",
+    "video:telas": "node video/gravar-telas.mjs",
+    "video": "python3 video/montar_video.py"
   },
   "dependencies": {
     "react": "18.3.1",
@@ -27,6 +29,7 @@
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "@vitejs/plugin-react": "6.1.2",
+    "playwright": "^1.64.1",
     "tsx": "4.20.3",
     "typescript": "5.9.3",
     "vite": "8.3.5",
