@@ -4,6 +4,8 @@
 
 > Sou um protótipo de estudo, não um canal oficial. Confirme nas fontes indicadas. Toda economia, geração ou custo mostrado aqui é **estimativa**, não resultado garantido.
 
+> **Vídeo técnico:** https://youtu.be/bNMKehIb9-4 · **Site:** https://gabrielroma0.github.io/GS2-SERS/
+
 > **Para a dupla:** o passo a passo do que fazer agora está em [docs/como-fazer.md](docs/como-fazer.md).
 
 ## Integrantes
